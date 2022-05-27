@@ -9,10 +9,8 @@ DEPENDS = ""
 
 SRC_URI = ""
 
-inherit rpi-basic-image
+inherit core-image
 inherit populate_sdk_qt5
-
-IMAGE_FEATURES:append = " splash"
 
 IMAGE_INSTALL:remove = " \
   x11 \
