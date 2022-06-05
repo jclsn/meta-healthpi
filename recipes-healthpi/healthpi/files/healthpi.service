@@ -1,0 +1,14 @@
+[Unit]
+Description=Autostart HealthPi
+
+After=syslog.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/healthpi
+Restart=on-failure
+RestartSec=0
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
