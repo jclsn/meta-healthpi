@@ -12,6 +12,12 @@ SRC_URI = ""
 inherit core-image
 inherit populate_sdk_qt5
 
+EXTRA_IMAGE_FEATURES = "debug-tweaks ssh-server-openssh"
+CORE_IMAGE_EXTRA_INSTALL += "openssh-sftp openssh-sftp-server"
+INIT_MANAGER = "systemd"
+
+LICENSE_FLAGS_ACCEPTED = "commercial"
+
 IMAGE_INSTALL:remove = " \
   x11 \
   wayland \
@@ -47,49 +53,8 @@ IMAGE_INSTALL:append = " \
   valgrind \
 "
 
-PACKAGECONFIG:append:pn-qtbase = " \
-  eglfs \
-  freetype \
-  gles2 \
-  kms  \
-"
-
-
 DISTRO_FEATURES:append = " \
   opengl \
   eglfs \
   gles2 \
 "
-
-RPI_KERNEL_DEVICETREE_OVERLAYS:append = "\
-    overlays/mcp3008.dtbo \
-"
-
-# Hostname of the machine
-hostname:pn-base-files = "healthpi64"
-
-# Image file system types to package
-IMAGE_FSTYPES = "rpi-sdimg"
-
-# Package management configuration
-PACKAGE_CLASSES = "package_ipk"
-
-# rpi-specific
-ENABLE_SPI = "1"
-ENABLE_I2C = "1"
-VC4DTBO = "vc4-fkms-v3d"
-
-RPI_EXTRA_CONFIG = "\
-  disable_overscan=1 \n\
-  dtoverlay=max30102,int_pin=4 \n\
-  dtoverlay=mcp3008:spi0-0-present,spi0-0-speed=3600000 \n\
-  dtoverlay=w1-gpio,gpiopin=17 \n\
-  dtparam=audio=on \n\
-  dtparam=i2c_arm=on \n\
-  dtparam=spi=on \n\
-  enable_uart=1 \n\
-"
-
-MACHINE ??= "raspberrypi4-64"
-DISTRO ??= "poky"
-SDKMACHINE ?= "x86_64"
