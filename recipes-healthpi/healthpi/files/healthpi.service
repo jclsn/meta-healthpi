@@ -4,11 +4,13 @@ Description=Autostart HealthPi
 After=syslog.target
 
 [Service]
+Environment="DISPLAY=:0"
+Environment="QT_QPA_PLATFORM=eglfs"
+Environment="QT_QPA_EGLFS_INTEGRATION=eglfs_kms"
 Type=simple
 ExecStart=/usr/bin/healthpi
 Restart=on-failure
-RestartSec=0
-KillMode=process
+RestartSec=1
 
 [Install]
 WantedBy=multi-user.target

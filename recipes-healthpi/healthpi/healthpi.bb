@@ -10,7 +10,6 @@ DEPENDS += " \
     qtquickcontrols2 \
     qtquicktimeline \
     qtmultimedia \
-    qttranslations \
 "
 
 PV = "1.0+git${SRCPV}"
@@ -22,7 +21,7 @@ S = "${WORKDIR}/git"
 
 FILES:${PN} += " \
     /usr/bin \
-    /usr/bin/HealthPi \
+    /usr/bin/healthpi \
 "
 
 RDEPENDS:${PN} = " \
@@ -36,6 +35,10 @@ RDEPENDS:${PN} = " \
 
 COMPATIBLE_MACHINE = "raspberrypi4-64"
 
+do_install:append() {
+  install -d ${D}/usr/bin
+  install -m 0755 ${WORKDIR}/build/HealthPi ${D}/usr/bin/healthpi
+}
 
 inherit systemd
 
