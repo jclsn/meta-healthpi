@@ -4,9 +4,12 @@ Description=Autostart HealthPi
 After=syslog.target
 
 [Service]
+ExecPreStart=/bin/sleep 10
 Environment="DISPLAY=:0"
 Environment="QT_QPA_PLATFORM=eglfs"
 Environment="QT_QPA_EGLFS_INTEGRATION=eglfs_kms"
+Environment="XDG_RUNTIME_DIR=/home/root"
+Environment="QT_QPA_FONTDIR=/home/root/fonts"
 Type=simple
 ExecStart=/usr/bin/healthpi
 Restart=on-failure
