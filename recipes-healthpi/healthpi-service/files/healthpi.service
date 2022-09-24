@@ -1,10 +1,10 @@
 [Unit]
 Description=Autostart HealthPi
 
-After=syslog.target
+After=default.target
+After=graphical-session.target
 
 [Service]
-ExecPreStart=/bin/sleep 10
 Environment="DISPLAY=:0"
 Environment="QT_QPA_PLATFORM=eglfs"
 Environment="QT_QPA_EGLFS_INTEGRATION=eglfs_kms"
